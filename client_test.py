@@ -1,6 +1,6 @@
 import unittest
 from client3 import getDataPoint
-
+from client3 import getRatio
 
 class ClientTest(unittest.TestCase):
     def test_getDataPoint_calculatePrice(self):
@@ -38,7 +38,7 @@ class ClientTest(unittest.TestCase):
         for quote in quotes:
             stock, bid_price, ask_price, price = getDataPoint(quote)
             price[stock] = price
-        self.assertIsNot(price['ABC'], 0)
+        self.assertIsNot(getRatio(price['ABC'], price['DEF']), 0)
 
     def test_getRatio_isPriceBZero(self):
         quotes = [
@@ -51,7 +51,7 @@ class ClientTest(unittest.TestCase):
         for quote in quotes:
             stock, bid_price, ask_price, price = getDataPoint(quote)
             price[stock] = price
-        self.assertIsNot(price['DEF'], 0)
+        self.assertIsNot(getRatio(price['ABC'], price['DEF']), '')
 
 
 if __name__ == '__main__':
